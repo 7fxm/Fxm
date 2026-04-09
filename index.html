@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>傅欣梅 - 个人课程页面</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --background-color: #f9fafb;
+            --text-color: #1f2937;
+            --card-background: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #2563eb);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.1)" d="M0,0 L100,0 L100,100 L0,100 Z"></path></svg>');
+            background-size: cover;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .title {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .bio {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .courses-section {
+            padding: 80px 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .course-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .course-description {
+            margin-bottom: 20px;
+            color: #6b7280;
+        }
+
+        .course-link {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .course-link:hover {
+            background: #2563eb;
+        }
+
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 0;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .courses-section {
+                padding: 60px 0;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=professional%20teacher%20portrait%2C%20friendly%20smile%2C%20academic%20background%2C%20high%20quality&image_size=square_hd" alt="傅欣梅" class="profile-photo">
+            <h1>傅欣梅</h1>
+            <div class="title">广东科学技术职业学院 | 商学院 | 商务数据分析与应用专业</div>
+            <p class="bio">
+                致力于商务数据分析与应用领域的教学与研究，拥有丰富的教学经验和实践经验。
+                主要教授Python基础、数据分析技术、数据采集与处理、供应链数据分析、数据库原理与应用等课程。
+            </p>
+        </div>
+    </header>
+
+    <section class="courses-section">
+        <div class="container">
+            <h2>课程信息</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <h3>Python基础</h3>
+                    <p class="course-description">
+                        介绍Python编程语言的基本语法、数据类型、控制结构、函数、模块等基础知识，为数据分析打下坚实基础。
+                    </p>
+                    <a href="#" class="course-link">查看详情</a>
+                </div>
+                <div class="course-card">
+                    <h3>数据分析技术</h3>
+                    <p class="course-description">
+                        学习数据分析的基本方法和技术，包括数据清洗、数据可视化、统计分析等，使用Python相关库进行实践。
+                    </p>
+                    <a href="#" class="course-link">查看详情</a>
+                </div>
+                <div class="course-card">
+                    <h3>数据采集与处理</h3>
+                    <p class="course-description">
+                        掌握数据采集的方法和工具，包括网络爬虫、API调用等，以及数据预处理和数据转换技术。
+                    </p>
+                    <a href="#" class="course-link">查看详情</a>
+                </div>
+                <div class="course-card">
+                    <h3>供应链数据分析</h3>
+                    <p class="course-description">
+                        应用数据分析技术解决供应链管理中的问题，包括需求预测、库存优化、供应商评估等。
+                    </p>
+                    <a href="#" class="course-link">查看详情</a>
+                </div>
+                <div class="course-card">
+                    <h3>数据库原理与应用</h3>
+                    <p class="course-description">
+                        学习数据库的基本原理、SQL语言、数据库设计等，掌握关系型数据库的应用和管理。
+                    </p>
+                    <a href="#" class="course-link">查看详情</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="contact-info">
+                <p>广东科学技术职业学院 | 商学院</p>
+                <p>商务数据分析与应用专业</p>
+            </div>
+            <div class="copyright">
+                © 2026 傅欣梅. 保留所有权利.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 为课程卡片添加动画延迟
+        document.addEventListener('DOMContentLoaded', function() {
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach((card, index) => {
+                card.style.animationDelay = `${0.2 + index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
