@@ -10,12 +10,19 @@
     <style>
         :root {
             --primary-color: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #1d4ed8;
             --secondary-color: #10b981;
+            --secondary-light: #34d399;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-orange: #f97316;
             --background-color: #f9fafb;
             --text-color: #1f2937;
             --card-background: #ffffff;
             --border-color: #e5e7eb;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -29,6 +36,7 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--background-color);
+            overflow-x: hidden;
         }
 
         .container {
@@ -37,13 +45,103 @@
             padding: 0 20px;
         }
 
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-purple));
+            border-radius: 50%;
+            top: 10%;
+            left: -5%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-light));
+            border-radius: 30%;
+            top: 60%;
+            right: -3%;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+            border-radius: 50% 20% 50% 20%;
+            bottom: 20%;
+            left: 10%;
+            animation-delay: -10s;
+        }
+
+        .shape-4 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--secondary-light));
+            border-radius: 20% 50% 20% 50%;
+            top: 30%;
+            right: 15%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-30px) rotate(5deg) scale(1.05);
+            }
+            50% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            75% {
+                transform: translateY(30px) rotate(-5deg) scale(0.95);
+            }
+        }
+
         .nav-bar {
-            background: var(--card-background);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             box-shadow: var(--shadow);
             padding: 15px 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 2px solid transparent;
+            background-image: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-purple), var(--accent-orange), var(--primary-color));
+            background-size: 200% 100%;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+            background-clip: padding-box;
+            border-image: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-purple), var(--accent-orange), var(--primary-color)) 1;
+            animation: border-flow 8s linear infinite;
+        }
+
+        @keyframes border-flow {
+            0% {
+                background-position: 0 100%;
+            }
+            100% {
+                background-position: 200% 100%;
+            }
         }
 
         .nav-content {
@@ -55,28 +153,70 @@
         .nav-logo {
             font-size: 1.25rem;
             font-weight: 700;
-            color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
+            position: relative;
+        }
+
+        .nav-logo::after {
+            content: '📚';
+            margin-left: 8px;
+            animation: book-bounce 2s infinite;
+        }
+
+        @keyframes book-bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .nav-link {
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-purple));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
         }
 
         .nav-link:hover {
             color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-color), #2563eb);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, var(--primary-dark) 100%);
             color: white;
             padding: 80px 0;
             text-align: center;
@@ -91,8 +231,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.1)" d="M0,0 L100,0 L100,100 L0,100 Z"></path></svg>');
-            background-size: cover;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
         }
 
         .header-content {
@@ -101,119 +243,400 @@
         }
 
         .profile-photo {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 4px solid white;
-            margin-bottom: 20px;
+            border: 6px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, var(--primary-light), var(--secondary-light), var(--accent-purple)) border-box;
+            margin-bottom: 25px;
             object-fit: cover;
-            box-shadow: var(--shadow);
+            box-shadow: 
+                0 0 0 8px rgba(255, 255, 255, 0.2),
+                0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: photo-glow 3s infinite alternate;
+        }
+
+        @keyframes photo-glow {
+            0% {
+                box-shadow: 
+                    0 0 0 8px rgba(255, 255, 255, 0.2),
+                    0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+            100% {
+                box-shadow: 
+                    0 0 0 12px rgba(255, 255, 255, 0.3),
+                    0 25px 50px rgba(0, 0, 0, 0.4),
+                    0 0 30px rgba(96, 165, 250, 0.5);
+            }
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             animation: fadeInUp 0.8s ease-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::before {
+            content: '✨';
+            position: absolute;
+            left: -50px;
+            top: 0;
+            animation: sparkle-left 2s infinite;
+        }
+
+        h1::after {
+            content: '✨';
+            position: absolute;
+            right: -50px;
+            top: 0;
+            animation: sparkle-right 2s infinite;
+        }
+
+        @keyframes sparkle-left {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.5) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+        }
+
+        @keyframes sparkle-right {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+            50% {
+                opacity: 0;
+                transform: scale(0.5) rotate(0deg);
+            }
         }
 
         .title {
-            font-size: 1.25rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
             animation: fadeInUp 0.8s ease-out 0.2s both;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 30px;
+            border-radius: 30px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .title::before {
+            content: '🎓';
+            margin-right: 10px;
         }
 
         .bio {
-            max-width: 600px;
-            margin: 0 auto 30px;
-            font-size: 1.1rem;
-            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            font-size: 1.15rem;
+            opacity: 0.95;
             animation: fadeInUp 0.8s ease-out 0.4s both;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
+        .bio::before {
+            content: '💡';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .courses-section {
-            padding: 80px 0;
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
         }
 
         h2 {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-purple), var(--accent-pink), var(--primary-color));
+            border-radius: 2px;
         }
 
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 35px;
         }
 
         .course-card {
             background: var(--card-background);
-            border-radius: 12px;
-            padding: 30px;
+            border-radius: 24px;
+            padding: 35px;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-purple), var(--accent-orange));
+            background-size: 300% 100%;
+            animation: gradient-flow 5s ease infinite;
+        }
+
+        @keyframes gradient-flow {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .course-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
         }
 
         .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .course-card:hover::after {
+            opacity: 1;
         }
 
         .course-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        .course-card h3::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-purple));
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .course-card:hover h3::before {
+            width: 100%;
         }
 
         .course-description {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #6b7280;
+            line-height: 1.8;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .course-description::before {
+            content: '📖';
+            position: absolute;
+            left: 0;
+            top: 0;
         }
 
         .course-link {
             display: inline-block;
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-purple));
             color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 14px 32px;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: 500;
-            transition: background 0.3s ease;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .course-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .course-link:hover::before {
+            left: 100%;
         }
 
         .course-link:hover {
-            background: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+        }
+
+        .course-link::after {
+            content: ' →';
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .course-link:hover::after {
+            transform: translateX(5px);
+        }
+
+        .course-card:nth-child(1)::before {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+        }
+
+        .course-card:nth-child(2)::before {
+            background: linear-gradient(90deg, #10b981, #8b5cf6);
+        }
+
+        .course-card:nth-child(3)::before {
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+        }
+
+        .course-card:nth-child(4)::before {
+            background: linear-gradient(90deg, #ec4899, #f97316);
+        }
+
+        .course-card:nth-child(5)::before {
+            background: linear-gradient(90deg, #f97316, #3b82f6);
         }
 
         footer {
-            background: #1f2937;
+            background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #1f2937 100%);
             color: white;
-            padding: 40px 0;
+            padding: 60px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
         }
 
         .footer-content {
             max-width: 600px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-info {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-info p:first-child::before {
+            content: '🏫';
+            margin-right: 10px;
+        }
+
+        .contact-info p:last-child::before {
+            content: '📊';
+            margin-right: 10px;
         }
 
         .copyright {
-            opacity: 0.7;
-            font-size: 0.9rem;
+            opacity: 0.8;
+            font-size: 0.95rem;
+            position: relative;
+            padding-top: 20px;
+        }
+
+        .copyright::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -222,39 +645,70 @@
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
             header {
                 padding: 60px 0;
             }
 
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+
+            h1::before,
+            h1::after {
+                display: none;
+            }
+
+            .title {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+            }
+
+            .bio {
+                padding: 20px;
+                font-size: 1rem;
             }
 
             .courses-section {
                 padding: 60px 0;
             }
 
+            h2 {
+                font-size: 2rem;
+            }
+
             .courses-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .floating-shapes {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+
     <nav class="nav-bar">
         <div class="container nav-content">
             <a href="index.html" class="nav-logo">傅欣梅 | 课程</a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link">首页</a>
-                <a href="courses/python-basics.html" class="nav-link">Python基础</a>
-                <a href="courses/data-analysis.html" class="nav-link">数据分析技术</a>
-                <a href="courses/data-collection.html" class="nav-link">数据采集与处理</a>
-                <a href="courses/supply-chain.html" class="nav-link">供应链数据分析</a>
-                <a href="courses/database.html" class="nav-link">数据库原理与应用</a>
+                <a href="index.html" class="nav-link">🏠 首页</a>
+                <a href="courses/python-basics.html" class="nav-link">🐍 Python基础</a>
+                <a href="courses/data-analysis.html" class="nav-link">📈 数据分析技术</a>
+                <a href="courses/data-collection.html" class="nav-link">🔍 数据采集与处理</a>
+                <a href="courses/supply-chain.html" class="nav-link">📦 供应链数据分析</a>
+                <a href="courses/database.html" class="nav-link">🗄️ 数据库原理与应用</a>
+                <a href="test.html" class="nav-link">📝 学习测试</a>
             </div>
         </div>
     </nav>
@@ -273,42 +727,42 @@
 
     <section class="courses-section">
         <div class="container">
-            <h2>课程信息</h2>
+            <h2>🌟 精彩课程 🌟</h2>
             <div class="courses-grid">
                 <div class="course-card">
                     <h3>Python基础</h3>
                     <p class="course-description">
                         介绍Python编程语言的基本语法、数据类型、控制结构、函数、模块等基础知识，为数据分析打下坚实基础。
                     </p>
-                    <a href="courses/python-basics.html" class="course-link">查看详情</a>
+                    <a href="courses/python-basics.html" class="course-link">开始学习</a>
                 </div>
                 <div class="course-card">
                     <h3>数据分析技术</h3>
                     <p class="course-description">
                         学习数据分析的基本方法和技术，包括数据清洗、数据可视化、统计分析等，使用Python相关库进行实践。
                     </p>
-                    <a href="courses/data-analysis.html" class="course-link">查看详情</a>
+                    <a href="courses/data-analysis.html" class="course-link">开始学习</a>
                 </div>
                 <div class="course-card">
                     <h3>数据采集与处理</h3>
                     <p class="course-description">
                         掌握数据采集的方法和工具，包括网络爬虫、API调用等，以及数据预处理和数据转换技术。
                     </p>
-                    <a href="courses/data-collection.html" class="course-link">查看详情</a>
+                    <a href="courses/data-collection.html" class="course-link">开始学习</a>
                 </div>
                 <div class="course-card">
                     <h3>供应链数据分析</h3>
                     <p class="course-description">
                         应用数据分析技术解决供应链管理中的问题，包括需求预测、库存优化、供应商评估等。
                     </p>
-                    <a href="courses/supply-chain.html" class="course-link">查看详情</a>
+                    <a href="courses/supply-chain.html" class="course-link">开始学习</a>
                 </div>
                 <div class="course-card">
                     <h3>数据库原理与应用</h3>
                     <p class="course-description">
                         学习数据库的基本原理、SQL语言、数据库设计等，掌握关系型数据库的应用和管理。
                     </p>
-                    <a href="courses/database.html" class="course-link">查看详情</a>
+                    <a href="courses/database.html" class="course-link">开始学习</a>
                 </div>
             </div>
         </div>
@@ -321,17 +775,25 @@
                 <p>商务数据分析与应用专业</p>
             </div>
             <div class="copyright">
-                © 2026 傅欣梅. 保留所有权利.
+                © 2026 傅欣梅. 保留所有权利. 🌟
             </div>
         </div>
     </footer>
 
     <script>
-        // 为课程卡片添加动画延迟
         document.addEventListener('DOMContentLoaded', function() {
             const courseCards = document.querySelectorAll('.course-card');
             courseCards.forEach((card, index) => {
                 card.style.animationDelay = `${0.2 + index * 0.1}s`;
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
             });
         });
     </script>
