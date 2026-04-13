@@ -37,6 +37,44 @@
             padding: 0 20px;
         }
 
+        .nav-bar {
+            background: var(--card-background);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
         header {
             background: linear-gradient(135deg, var(--primary-color), #2563eb);
             color: white;
@@ -184,6 +222,10 @@
         }
 
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
             header {
                 padding: 60px 0;
             }
@@ -203,6 +245,20 @@
     </style>
 </head>
 <body>
+    <nav class="nav-bar">
+        <div class="container nav-content">
+            <a href="index.html" class="nav-logo">傅欣梅 | 课程</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="courses/python-basics.html" class="nav-link">Python基础</a>
+                <a href="courses/data-analysis.html" class="nav-link">数据分析技术</a>
+                <a href="courses/data-collection.html" class="nav-link">数据采集与处理</a>
+                <a href="courses/supply-chain.html" class="nav-link">供应链数据分析</a>
+                <a href="courses/database.html" class="nav-link">数据库原理与应用</a>
+            </div>
+        </div>
+    </nav>
+
     <header>
         <div class="container header-content">
             <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=professional%20teacher%20portrait%2C%20friendly%20smile%2C%20academic%20background%2C%20high%20quality&image_size=square_hd" alt="傅欣梅" class="profile-photo">
@@ -224,35 +280,35 @@
                     <p class="course-description">
                         介绍Python编程语言的基本语法、数据类型、控制结构、函数、模块等基础知识，为数据分析打下坚实基础。
                     </p>
-                    <a href="#" class="course-link">查看详情</a>
+                    <a href="courses/python-basics.html" class="course-link">查看详情</a>
                 </div>
                 <div class="course-card">
                     <h3>数据分析技术</h3>
                     <p class="course-description">
                         学习数据分析的基本方法和技术，包括数据清洗、数据可视化、统计分析等，使用Python相关库进行实践。
                     </p>
-                    <a href="#" class="course-link">查看详情</a>
+                    <a href="courses/data-analysis.html" class="course-link">查看详情</a>
                 </div>
                 <div class="course-card">
                     <h3>数据采集与处理</h3>
                     <p class="course-description">
                         掌握数据采集的方法和工具，包括网络爬虫、API调用等，以及数据预处理和数据转换技术。
                     </p>
-                    <a href="#" class="course-link">查看详情</a>
+                    <a href="courses/data-collection.html" class="course-link">查看详情</a>
                 </div>
                 <div class="course-card">
                     <h3>供应链数据分析</h3>
                     <p class="course-description">
                         应用数据分析技术解决供应链管理中的问题，包括需求预测、库存优化、供应商评估等。
                     </p>
-                    <a href="#" class="course-link">查看详情</a>
+                    <a href="courses/supply-chain.html" class="course-link">查看详情</a>
                 </div>
                 <div class="course-card">
                     <h3>数据库原理与应用</h3>
                     <p class="course-description">
                         学习数据库的基本原理、SQL语言、数据库设计等，掌握关系型数据库的应用和管理。
                     </p>
-                    <a href="#" class="course-link">查看详情</a>
+                    <a href="courses/database.html" class="course-link">查看详情</a>
                 </div>
             </div>
         </div>

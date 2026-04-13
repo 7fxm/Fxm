@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据采集与处理 - 傅欣梅个人课程页面</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --background-color: #f9fafb;
+            --text-color: #1f2937;
+            --card-background: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #2563eb);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.1)" d="M0,0 L100,0 L100,100 L0,100 Z"></path></svg>');
+            background-size: cover;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .nav-bar {
+            background: var(--card-background);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .course-content {
+            padding: 60px 0;
+        }
+
+        .course-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .course-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .course-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .knowledge-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .knowledge-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .knowledge-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .knowledge-card p {
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .learning-content {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .content-item {
+            margin-bottom: 30px;
+        }
+
+        .content-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .content-item ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #6b7280;
+        }
+
+        .content-item li {
+            margin-bottom: 8px;
+        }
+
+        .reading-materials {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .material-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .material-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .material-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .material-item p {
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .material-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .material-link:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 30px 0;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .course-content {
+                padding: 40px 0;
+            }
+
+            .course-title {
+                font-size: 2rem;
+            }
+
+            .knowledge-points {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-content,
+            .reading-materials {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>数据采集与处理</h1>
+            <div class="subtitle">广东科学技术职业学院 | 商学院 | 商务数据分析与应用专业</div>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <div class="container nav-content">
+            <a href="../index.html" class="nav-logo">傅欣梅 | 课程</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">首页</a>
+                <a href="python-basics.html" class="nav-link">Python基础</a>
+                <a href="data-analysis.html" class="nav-link">数据分析技术</a>
+                <a href="data-collection.html" class="nav-link">数据采集与处理</a>
+                <a href="supply-chain.html" class="nav-link">供应链数据分析</a>
+                <a href="database.html" class="nav-link">数据库原理与应用</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="course-content">
+        <div class="container">
+            <div class="course-header">
+                <h2 class="course-title">数据采集与处理</h2>
+                <p class="course-description">
+                    本课程掌握数据采集的方法和工具，包括网络爬虫、API调用等，以及数据预处理和数据转换技术。
+                    通过本课程的学习，学生将能够从各种数据源采集数据，并进行有效的数据预处理。
+                </p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">知识点</h3>
+                <div class="knowledge-points">
+                    <div class="knowledge-card">
+                        <h3>数据采集概述</h3>
+                        <p>数据采集的概念、重要性、方法和工具，以及数据源的分类和特点。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>网络爬虫</h3>
+                        <p>网络爬虫的基本原理、常用库和框架，以及爬取策略和反爬措施。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>API调用</h3>
+                        <p>API的概念、类型、认证方式，以及使用Python进行API调用的方法。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>数据预处理</h3>
+                        <p>数据预处理的重要性、方法和技术，包括数据清洗、数据集成、数据变换等。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>数据转换</h3>
+                        <p>数据格式转换、数据类型转换、数据标准化和归一化等技术。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>数据质量评估</h3>
+                        <p>数据质量的评估指标、方法和工具，以及数据质量改进的策略。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">学习内容</h3>
+                <div class="learning-content">
+                    <div class="content-item">
+                        <h3>第1章：数据采集概述</h3>
+                        <ul>
+                            <li>数据采集的概念和重要性</li>
+                            <li>数据源的分类和特点</li>
+                            <li>数据采集的方法和工具</li>
+                            <li>数据采集的伦理和法律问题</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第2章：Requests库</h3>
+                        <ul>
+                            <li>Requests库的安装和基本使用</li>
+                            <li>HTTP请求方法：GET、POST、PUT、DELETE等</li>
+                            <li>请求参数和 headers 设置</li>
+                            <li>响应处理和状态码</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第3章：BeautifulSoup库</h3>
+                        <ul>
+                            <li>BeautifulSoup的安装和基本使用</li>
+                            <li>HTML解析和导航</li>
+                            <li>CSS选择器和XPath</li>
+                            <li>数据提取和清洗</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第4章：Scrapy框架</h3>
+                        <ul>
+                            <li>Scrapy的安装和项目创建</li>
+                            <li>Spider的编写和运行</li>
+                            <li>Item和Pipeline的使用</li>
+                            <li>中间件和扩展</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第5章：API调用</h3>
+                        <ul>
+                            <li>API的概念和类型</li>
+                            <li>RESTful API的设计原则</li>
+                            <li>API认证和授权</li>
+                            <li>使用Python调用API的方法</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第6章：数据预处理</h3>
+                        <ul>
+                            <li>数据清洗：缺失值处理、异常值检测、重复值处理</li>
+                            <li>数据集成：数据合并、数据融合</li>
+                            <li>数据变换：数据标准化、数据归一化</li>
+                            <li>特征工程：特征选择、特征提取</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第7章：数据转换</h3>
+                        <ul>
+                            <li>数据格式转换：CSV、JSON、XML等</li>
+                            <li>数据类型转换</li>
+                            <li>数据结构转换</li>
+                            <li>数据压缩和存储</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">阅读材料</h3>
+                <div class="reading-materials">
+                    <div class="material-item">
+                        <h3>Python网络爬虫权威指南</h3>
+                        <p>作者：Ryan Mitchell</p>
+                        <p>出版社：人民邮电出版社</p>
+                        <a href="#" class="material-link">查看详情</a>
+                    </div>
+                    <div class="material-item">
+                        <h3>Web Scraping with Python</h3>
+                        <p>作者：Ryan Mitchell</p>
+                        <p>出版社：O'Reilly Media</p>
+                        <a href="#" class="material-link">查看详情</a>
+                    </div>
+                    <div class="material-item">
+                        <h3>数据采集与预处理</h3>
+                        <p>作者：周志华</p>
+                        <p>出版社：清华大学出版社</p>
+                        <a href="#" class="material-link">查看详情</a>
+                    </div>
+                    <div class="material-item">
+                        <h3>Python爬虫开发与项目实战</h3>
+                        <p>作者：范传辉</p>
+                        <p>出版社：人民邮电出版社</p>
+                        <a href="#" class="material-link">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="contact-info">
+                <p>广东科学技术职业学院 | 商学院</p>
+                <p>商务数据分析与应用专业</p>
+            </div>
+            <div class="copyright">
+                © 2026 傅欣梅. 保留所有权利.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

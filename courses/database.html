@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库原理与应用 - 傅欣梅个人课程页面</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --background-color: #f9fafb;
+            --text-color: #1f2937;
+            --card-background: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #2563eb);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.1)" d="M0,0 L100,0 L100,100 L0,100 Z"></path></svg>');
+            background-size: cover;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .nav-bar {
+            background: var(--card-background);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .course-content {
+            padding: 60px 0;
+        }
+
+        .course-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .course-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .course-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .knowledge-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .knowledge-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .knowledge-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .knowledge-card p {
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .learning-content {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .content-item {
+            margin-bottom: 30px;
+        }
+
+        .content-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .content-item ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #6b7280;
+        }
+
+        .content-item li {
+            margin-bottom: 8px;
+        }
+
+        .reading-materials {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .material-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .material-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .material-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .material-item p {
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .material-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .material-link:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 30px 0;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .course-content {
+                padding: 40px 0;
+            }
+
+            .course-title {
+                font-size: 2rem;
+            }
+
+            .knowledge-points {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-content,
+            .reading-materials {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>数据库原理与应用</h1>
+            <div class="subtitle">广东科学技术职业学院 | 商学院 | 商务数据分析与应用专业</div>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <div class="container nav-content">
+            <a href="../index.html" class="nav-logo">傅欣梅 | 课程</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">首页</a>
+                <a href="python-basics.html" class="nav-link">Python基础</a>
+                <a href="data-analysis.html" class="nav-link">数据分析技术</a>
+                <a href="data-collection.html" class="nav-link">数据采集与处理</a>
+                <a href="supply-chain.html" class="nav-link">供应链数据分析</a>
+                <a href="database.html" class="nav-link">数据库原理与应用</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="course-content">
+        <div class="container">
+            <div class="course-header">
+                <h2 class="course-title">数据库原理与应用</h2>
+                <p class="course-description">
+                    本课程学习数据库的基本原理、SQL语言、数据库设计等，掌握关系型数据库的应用和管理。
+                    通过本课程的学习，学生将能够设计和管理数据库，使用SQL进行数据操作。
+                </p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">知识点</h3>
+                <div class="knowledge-points">
+                    <div class="knowledge-card">
+                        <h3>数据库概述</h3>
+                        <p>数据库的基本概念、发展历史、类型和应用领域，以及数据库管理系统的功能和特点。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>关系模型</h3>
+                        <p>关系模型的基本概念、关系代数、关系完整性约束，以及关系数据库的设计原则。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>SQL语言</h3>
+                        <p>SQL的基本语法、数据定义语言（DDL）、数据操纵语言（DML）、数据控制语言（DCL）等。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>数据库设计</h3>
+                        <p>数据库设计的流程、概念模型设计、逻辑模型设计、物理模型设计，以及范式理论。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>数据库管理</h3>
+                        <p>数据库的安装、配置、备份与恢复、性能优化、安全管理等。</p>
+                    </div>
+                    <div class="knowledge-card">
+                        <h3>NoSQL数据库</h3>
+                        <p>NoSQL数据库的概念、类型、特点和应用场景，以及与关系型数据库的对比。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">学习内容</h3>
+                <div class="learning-content">
+                    <div class="content-item">
+                        <h3>第1章：数据库概述</h3>
+                        <ul>
+                            <li>数据库的基本概念和重要性</li>
+                            <li>数据库的发展历史</li>
+                            <li>数据库的类型：关系型、NoSQL等</li>
+                            <li>数据库管理系统的功能和特点</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第2章：关系模型与SQL</h3>
+                        <ul>
+                            <li>关系模型的基本概念</li>
+                            <li>关系代数和关系演算</li>
+                            <li>关系完整性约束</li>
+                            <li>SQL的基本语法和特点</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第3章：数据库设计</h3>
+                        <ul>
+                            <li>数据库设计的流程</li>
+                            <li>概念模型设计：实体-关系模型</li>
+                            <li>逻辑模型设计：关系模式设计</li>
+                            <li>物理模型设计</li>
+                            <li>范式理论：第一范式、第二范式、第三范式等</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第4章：数据库管理系统</h3>
+                        <ul>
+                            <li>MySQL的安装和配置</li>
+                            <li>数据库的创建和管理</li>
+                            <li>表的创建和管理</li>
+                            <li>索引的创建和管理</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第5章：高级SQL</h3>
+                        <ul>
+                            <li>复杂查询：JOIN、子查询、聚合函数等</li>
+                            <li>视图的创建和使用</li>
+                            <li>存储过程和触发器</li>
+                            <li>事务处理和并发控制</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第6章：数据库安全</h3>
+                        <ul>
+                            <li>数据库安全的重要性</li>
+                            <li>用户权限管理</li>
+                            <li>数据加密</li>
+                            <li>安全审计</li>
+                        </ul>
+                    </div>
+                    <div class="content-item">
+                        <h3>第7章：NoSQL数据库</h3>
+                        <ul>
+                            <li>NoSQL数据库的概念和特点</li>
+                            <li>NoSQL数据库的类型：键值存储、文档存储、列存储、图数据库等</li>
+                            <li>MongoDB的基本使用</li>
+                            <li>NoSQL与关系型数据库的对比</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">阅读材料</h3>
+                <div class="reading-materials">
+                    <div class="material-item">
+                        <h3>数据库系统概念</h3>
+                        <p>作者：Abraham Silberschatz</p>
+                        <p>出版社：机械工业出版社</p>
+                        <a href="#" class="material-link">查看详情</a>
+                    </div>
+                    <div class="material-item">
+                        <h3>SQL必知必会</h3>
+                        <p>作者：Alan Beaulieu</p>
+                        <p>出版社：人民邮电出版社</p>
+                        <a href="#" class="material-link">查看详情</a>
+                    </div>
+                    <div class="material-item">
+                        <h3>数据库设计与开发</h3>
+                        <p>作者：Thomas M. Connolly</p>
+                        <p>出版社：电子工业出版社</p>
+                        <a href="#" class="material-link">查看详情</a>
+                    </div>
+                    <div class="material-item">
+                        <h3>NoSQL精粹</h3>
+                        <p>作者：Pramod J. Sadalage</p>
+                        <p>出版社：人民邮电出版社</p>
+                        <a href="#" class="material-link">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="contact-info">
+                <p>广东科学技术职业学院 | 商学院</p>
+                <p>商务数据分析与应用专业</p>
+            </div>
+            <div class="copyright">
+                © 2026 傅欣梅. 保留所有权利.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
